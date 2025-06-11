@@ -1,8 +1,11 @@
 package guru.springframework.springaiaudio.controllers;
 
 
+import guru.springframework.springaiaudio.model.Question;
 import guru.springframework.springaiaudio.services.OpenAIService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -13,6 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class QuestionController {
 
     private final OpenAIService openAIService;
+
+    @PostMapping(value ="/talk", produces = "audio/mpeg")
+    public byte[] talktalk(@RequestBody Question question) {
+        return openAIService.getSpeech(question);
+    }
 
     //todo implement this
 
